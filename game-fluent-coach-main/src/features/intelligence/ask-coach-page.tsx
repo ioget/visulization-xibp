@@ -1,0 +1,20 @@
+import { useState } from "react";
+import { ArrowUp, Bot, Check, Search, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AIBadge, DataPill, PageIntro, Panel, SourcePanel } from "@/components/xamcoach/core";
+import { TacticalBoard } from "@/components/xamcoach/visuals";
+
+const suggestions = ["How should we attack Lyon's drop coverage?","Who is trending up over the last five games?","Build a late-game sideline action"];
+export function AskCoachPage() {
+  const [query,setQuery] = useState(""); const [sent,setSent] = useState(true);
+  const submit=()=>{if(query.trim()){setSent(true);setQuery("")}};
+  return <div className="mx-auto max-w-5xl"><PageIntro eyebrow="Basketball intelligence" title="Ask Coach" description="Turn verified team data into evidence-backed coaching decisions." />
+    {!sent ? <Panel className="p-8 text-center"><span className="mx-auto grid size-12 place-items-center rounded-xl bg-intelligence text-data"><Bot/></span><h3 className="mt-4 text-lg font-bold">What do you want to understand?</h3><p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">Ask about performance, opponents, lineups, or tactical concepts.</p></Panel> : <div className="space-y-5">
+      <div className="flex justify-end"><div className="max-w-xl rounded-xl rounded-br-sm bg-foreground px-4 py-3 text-sm text-background">How should we attack Lyon's drop coverage in Saturday's game?</div></div>
+      <Panel className="border-intelligence-border bg-intelligence p-5 md:p-6"><div className="flex items-center justify-between"><div className="flex items-center gap-2"><Sparkles className="size-4 text-data"/><h3 className="text-[15px] font-bold">Recommended approach</h3></div><AIBadge/></div><div className="mt-4 space-y-3 text-sm leading-6"><p>Lyon’s center retreats below the foul line on 62% of ball screens. Create an early advantage by lifting the weak-side wing and forcing the low defender to choose.</p><ol className="space-y-2"><li className="flex gap-3"><b className="text-data">01</b><span>Use Fauthoux–Rupert high pick-and-roll to pull the drop defender above the nail.</span></li><li className="flex gap-3"><b className="text-data">02</b><span>Station Johannes one pass away; Lyon concedes <strong>38.1%</strong> from the weak-side corner.</span></li><li className="flex gap-3"><b className="text-data">03</b><span>If the low defender tags, hit the short roll and play the 4-on-3.</span></li></ol></div><div className="mt-5"><p className="mb-2 text-[10px] font-bold uppercase tracking-[0.1em] text-muted-foreground">Key verified numbers</p><div className="flex flex-wrap gap-2"><DataPill>62% drop coverage</DataPill><DataPill>38.1% weak-side 3P</DataPill><DataPill>1.12 PPP short roll</DataPill></div></div><SourcePanel/></Panel>
+      <Panel className="p-5"><div className="mb-4 flex items-center justify-between"><div><p className="text-sm font-bold">Horns 45 · Weak-side lift</p><p className="text-xs text-muted-foreground">Tactical sequence generated from the briefing</p></div><span className="flex items-center gap-1 text-[10px] font-semibold text-success"><Check className="size-3"/>5 actions</span></div><TacticalBoard/></Panel>
+    </div>}
+    <div className="sticky bottom-4 mt-6 rounded-xl border border-border bg-surface p-2 shadow-overlay"><div className="flex items-end gap-2"><Search className="mb-2.5 ml-2 size-4 text-muted-foreground"/><textarea value={query} onChange={(e)=>setQuery(e.target.value)} onKeyDown={(e)=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit()}}} placeholder="Ask about your team..." className="max-h-28 min-h-10 flex-1 resize-none bg-transparent px-1 py-2 text-sm outline-none placeholder:text-muted-foreground"/><Button size="icon" onClick={submit} aria-label="Send question"><ArrowUp/></Button></div></div>
+    <div className="mt-3 flex flex-wrap gap-2">{suggestions.map(s=><button key={s} onClick={()=>setQuery(s)} className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">{s}</button>)}</div>
+  </div>;
+}
