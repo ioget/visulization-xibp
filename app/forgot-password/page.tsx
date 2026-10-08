@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Reset password — XamCoach",
+  title: "Reset password - XamCoach",
 };
 
 export default function ForgotPasswordPage() {

@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Create account — XamCoach",
+  title: "Create account - XamCoach",
 };
 
 export default function RegisterPage() {

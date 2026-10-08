@@ -1,4 +1,4 @@
-const shots: Array<[number, number, 0 | 1]> = [
+const demoShots: Array<[number, number, 0 | 1]> = [
   [49, 75, 1],
   [55, 70, 1],
   [43, 72, 0],
@@ -18,7 +18,26 @@ const shots: Array<[number, number, 0 | 1]> = [
   [69, 23, 1],
 ];
 
-export function ShotChart({ compact = false }: { compact?: boolean }) {
+export interface ShotChartShot {
+  x: number;
+  y: number;
+  made: boolean;
+}
+
+export function ShotChart({
+  compact = false,
+  shots: realShots,
+}: {
+  compact?: boolean;
+  /** Real {x, y, made} points in the same 0-100 normalized court space
+   * app/components/shot_chart.py::normalize_shots_for_court already
+   * computes -- falls back to the illustrative demo array when omitted, so
+   * pages not migrated yet keep their current placeholder look. */
+  shots?: ShotChartShot[];
+}) {
+  const shots: Array<[number, number, 0 | 1]> =
+    realShots?.map((s) => [s.x, s.y, s.made ? 1 : 0]) ?? demoShots;
+
   return (
     <div
       className={`relative overflow-hidden rounded-xl border border-border bg-court ${compact ? "h-52" : "h-72"}`}

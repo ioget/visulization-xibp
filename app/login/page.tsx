@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Log in — XamCoach",
+  title: "Log in - XamCoach",
 };
 
 export default function LoginPage() {

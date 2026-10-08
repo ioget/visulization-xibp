@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { AskCoachConversation } from "@/components/ask-coach/AskCoachConversation";
 
 export const metadata: Metadata = {
-  title: "Ask Coach — XamCoach",
+  title: "Ask Coach - XamCoach",
 };
 
 export default function AskCoachPage() {

@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+/* Dashboard match carousel: the front card animates in on top of the
+   peeking "stacked" cards behind it (components/dashboard/MatchSpotlight.tsx) */
+@keyframes spotlight-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Non-blocking page-load indicator, just under the header on every page
+   (components/layout/RouteLoadingBar.tsx) -- an indeterminate sweep, not a
+   real progress percentage: client pages fetch their own data after
+   mount, so there is no single "percent loaded" signal to track. */
+@keyframes route-loading-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
 :root {
   /* Brand */
   --color-orange: #f97316;
